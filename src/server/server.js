@@ -6,7 +6,10 @@ const express = require('express');
 const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
-const moviesRouter = require('../routes/movies');
+const moviesRouter = require('../routes/movies-route');
+const searchRouter = require('../routes/search-route');
+const {loadMoviesIntoDB, moviesAlreadyLoadedInDB} = require('../services/loader-service');
+
 
 
 
@@ -37,6 +40,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/movies', moviesRouter);
+app.use('/search', searchRouter);
 
 
 
@@ -61,5 +65,9 @@ app.use(function(err, req, res, next) {
   res.status(err.status || 500);
   res.render('error');
 });
+
+if(!moviesAlreadyLoadedInDB()){
+  loadMoviesIntoDB();
+}
 
 module.exports = app;

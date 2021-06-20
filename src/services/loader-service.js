@@ -3,23 +3,45 @@ const omdbClient = require('../clients/http/omdb-client');
 
 
 const loadMoviesIntoDB = async () => {
+
+    movieDB.deleteAllMovies();
+
+
     let pageCounter = 1;
     let continueLoad = true;
-    while (continueLoad) {
-        const moviesSearchResult = await omdbClient.searchMovies(pageCounter);
-        const moviesFilteredByYear = moviesSearchResult.filter(movie => parseInt(movie.Year) >= 2001);
-        const moviesDetails = await Promise.all(moviesFilteredByYear.map(async (movie) => { return await omdbClient.getMovieDetailsById(movie.imdbID) }));
 
+    //Loop until there are no more pages available
+    while (continueLoad) {
+        //Get all movies
+        const moviesSearchResult = await omdbClient.getMovies(pageCounter);
+        // Filter by year
+        const moviesFilteredByYear = moviesSearchResult.filter(movie => (parseInt(movie.Year) >= 2001 ));
+        // Get movies Details
+        const moviesDetails = await Promise.all(moviesFilteredByYear.map(async (movie) => { return await omdbClient.getMovieDetailsById(movie.imdbID) }));
+        // Save movies in the DB
         moviesDetails.forEach(movie => movieDB.saveMovie(movie));
+
+        console.log("Movies loaded : " + moviesSearchResult.length);
 
         pageCounter++;
         if (moviesSearchResult.length < 10) {
             continueLoad = false;
         }
-        console.log(moviesDetails);
     }
 }
 
 
+const moviesAlreadyLoadedInDB = async () => {
+    return getAllMovies.length > 0;
+}
 
-module.exports = loadMoviesIntoDB;
+
+const getAllMovies = async (res) => {
+    movieDB.getAllMovies(res);
+}
+
+
+
+
+
+module.exports = { loadMoviesIntoDB, getAllMovies, moviesAlreadyLoadedInDB };

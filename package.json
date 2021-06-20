@@ -3,7 +3,8 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "nodemon src/config/server.js"
+    "start": "nodemon src/server/server.js",
+    "test": "jest"
   },
   "dependencies": {
     "axios": "^0.21.1",
@@ -19,5 +20,8 @@
     "mongoose": "^5.12.4",
     "morgan": "~1.9.1",
     "nodemon": "^2.0.7"
+  },
+  "devDependencies": {
+    "axios-mock-adapter": "^1.19.0"
   }
 }
