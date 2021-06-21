@@ -10,12 +10,8 @@ const moviesRouter = require('../routes/movies-route');
 const searchRouter = require('../routes/search-route');
 const {loadMoviesIntoDB, moviesAlreadyLoadedInDB} = require('../services/loader-service');
 
-
-
-
 const app = express();
 app.use(cors());
-
 
 const router = express.Router();
 
@@ -24,7 +20,8 @@ require('dotenv').config();
 
 // env variables
 const PORT = process.env.PORT || 8000;
-const MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/movies-list-api-mu";
+
+const MONGODB_URI = process.env.MONGODB_URI || 'mongodb://localhost/movies-list-api-mu';
 
 mongoose.Promise = Promise;
 mongoose.connect(MONGODB_URI, { useNewUrlParser: true, useCreateIndex: true, useUnifiedTopology: true},
