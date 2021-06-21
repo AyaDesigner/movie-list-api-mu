@@ -1,6 +1,6 @@
 require('dotenv').config();
-const API_KEY = process.env.API_KEY;
-const API_URL = `http://www.omdbapi.com/?apikey=${API_KEY}`;
+const OMDB_API_KEY = process.env.OMDB_API_KEY;
+const OMDB_API_URL = `http://www.omdbapi.com/?apikey=${OMDB_API_KEY}`;
 const SEARCH_KEYWORD = "space";
 
 
@@ -19,7 +19,7 @@ describe('getMovies', () => {
         const mockAxios = new MockAdapter(axios);
         const moviesFromOmdbAPI = { Search: [] };
         const pageCounter = 1;
-        mockAxios.onGet(`${API_URL}&s=${SEARCH_KEYWORD}&page=${pageCounter}`).reply(200, moviesFromOmdbAPI);
+        mockAxios.onGet(`${OMDB_API_URL}&s=${SEARCH_KEYWORD}&page=${pageCounter}`).reply(200, moviesFromOmdbAPI);
 
         // execute test
         omdbClient.getMovies(1).then(response => {
@@ -45,7 +45,7 @@ describe('getMovies', () => {
                 Search: [movieObjSample]
             };
             const pageCounter = 1;
-            mockAxios.onGet(`${API_URL}&s=${SEARCH_KEYWORD}&page=${pageCounter}`).reply(200, moviesFromOmdbAPI);
+            mockAxios.onGet(`${OMDB_API_URL}&s=${SEARCH_KEYWORD}&page=${pageCounter}`).reply(200, moviesFromOmdbAPI);
 
             // execute test
             omdbClient.getMovies(1).then(response => {
@@ -71,7 +71,7 @@ describe('getMovies', () => {
                 Search: [movieObjSample, movieObjSample, movieObjSample, movieObjSample, movieObjSample, movieObjSample, movieObjSample, movieObjSample, movieObjSample, movieObjSample]
             };
             const pageCounter = 1;
-            mockAxios.onGet(`${API_URL}&s=${SEARCH_KEYWORD}&page=${pageCounter}`).reply(200, moviesFromOmdbAPI);
+            mockAxios.onGet(`${OMDB_API_URL}&s=${SEARCH_KEYWORD}&page=${pageCounter}`).reply(200, moviesFromOmdbAPI);
 
             // execute test
             omdbClient.getMovies(1).then(response => {
@@ -145,7 +145,7 @@ describe('getMovieDetailsById', () => {
             "Poster": "https://m.media-amazon.com/images/M/MV5BMmNlYzRiNDctZWNhMi00MzI4LThkZTctMTUzMmZkMmFmNThmXkEyXkFqcGdeQXVyNzkwMjQ5NzM@._V1_SX300.jpg"
         }
 
-        mockAxios.onGet(`${API_URL}&i=${movieId}`).reply(200, movieObjSample);
+        mockAxios.onGet(`${OMDB_API_URL}&i=${movieId}`).reply(200, movieObjSample);
 
         // execute test
         omdbClient.getMovieDetailsById(movieId).then(response => {
@@ -213,7 +213,7 @@ describe('getMovieDetailsById', () => {
                 "Poster": ""
             }
 
-            mockAxios.onGet(`${API_URL}&i=${movieId}`).reply(200, movieObjSample);
+            mockAxios.onGet(`${OMDB_API_URL}&i=${movieId}`).reply(200, movieObjSample);
 
             // execute test
             omdbClient.getMovieDetailsById(movieId).then(response => {
