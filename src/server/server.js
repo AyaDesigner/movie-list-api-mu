@@ -24,7 +24,7 @@ require('dotenv').config();
 
 // env variables
 const PORT = process.env.PORT || 8000;
-const MONGODB_URI = process.env.MONGODB_URI;
+const MONGODB_URI = process.env.MONGODB_URI | "mongodb://localhost/movies-list-api-mu";
 
 mongoose.Promise = Promise;
 mongoose.connect(MONGODB_URI, { useNewUrlParser: true, useCreateIndex: true, useUnifiedTopology: true},
