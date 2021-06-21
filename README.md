@@ -92,7 +92,9 @@ The REST API to the example app is described below.
 ```
   
   
-## Reload the database with the result from OMDB request (caution: to be used only in case of emergency, omdb has a limit of 1000 request per day)
+## Reload the database with the result from OMDB request 
+
+(caution: to be used only in case of emergency, omdb has a limit of 1000 request per day)
 
 ### Request 
 
@@ -113,7 +115,9 @@ The REST API to the example app is described below.
     Date: Mon, 21 Jun 202
   
    
-## Search movies by keyword (keyword can be in the movie's title, director's name or movie's plot)
+## Search movies by keyword 
+
+(keyword can be in the movie's title, director's name or movie's plot)
 
 ### Request 
 
