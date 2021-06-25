@@ -166,7 +166,7 @@ The REST API to the example app is described below.
 
 ### Coming next (a.k.a with more time available)
 
-* Add unit tests (only omdb-client test has been created) for each service and route
+* Add unit tests (only [omdb-client test](https://github.com/AyaDesigner/movie-list-api-mu/blob/main/src/__tests__/clients/http/omdb-client.test.js) has been created) for each service and route
 * Better handling of the errors 
 * Add filtering and pagination when returning movies
 
